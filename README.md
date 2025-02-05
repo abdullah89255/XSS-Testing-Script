@@ -17,7 +17,7 @@ sudo yum install jq          # For CentOS/RHEL
 1. **Clone or Download the Script**:
    ```bash
 git clone https://github.com/abdullah89255/XSS-Testing-Script
-```
+   ```
 
 2. **Make the Script Executable**:
    ```bash
