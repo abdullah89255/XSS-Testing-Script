@@ -42,6 +42,7 @@ sudo yum install jq          # For CentOS/RHEL
 2. **Make the Script Executable**:
    ```bash
    chmod +x xss_test.sh
+   chmod +x * 
    ```
 
 ## Usage
