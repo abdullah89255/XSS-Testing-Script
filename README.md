@@ -22,6 +22,7 @@ git clone https://github.com/abdullah89255/XSS-Testing-Script
 
 2. **Make the Script Executable**:
    ```bash
+   cd XSS-Testing-Script
    chmod +x xss_test.sh
    chmod +x * 
    ```
