@@ -24,7 +24,6 @@ git clone https://github.com/abdullah89255/XSS-Testing-Script
    ```bash
    cd XSS-Testing-Script
    chmod +x xss_test.sh
-   chmod +x * 
    ```
 
 ## Usage
