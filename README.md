@@ -24,12 +24,10 @@ git clone https://github.com/abdullah89255/XSS-Testing-Script
    ```bash
    cd XSS-Testing-Script
    chmod +x xss_test.sh
-pip install -r Requirements.txt --break-system-packages
+   pip install -r Requirements.txt --break-system-packages
    ```
 
 ## Usage
-
-### Basic Command Structure
 ```bash
 ./xss_test.sh [options]
 ```
