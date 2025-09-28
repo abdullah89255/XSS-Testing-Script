@@ -32,7 +32,7 @@ pip install -r Requirements.txt --break-system-packages
 ### Basic Command Structure
 ```bash
 ./xss_test.sh [options]
-
+```
 
 
 
@@ -76,7 +76,7 @@ If you want, I can give you a curated list of *open-source + good for CLI* XSS s
 
 
 
-```
+
 
 
 
